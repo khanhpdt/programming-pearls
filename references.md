@@ -1,0 +1,1 @@
+[1] Introduction to algorithms, 3rd edition, by Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest and Clifford Stein
