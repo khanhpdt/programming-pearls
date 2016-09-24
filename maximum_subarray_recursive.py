@@ -14,23 +14,23 @@ def find_max_subarray_from_one_end(array, range_subarray):
     return max_index, max_subarray_sum
 
 
-def find_maximum_crossing_subarray(array, low, mid, high):
+def find_max_crossing_subarray(array, low, mid, high):
     (left_index, left_sum) = find_max_subarray_from_one_end(array, range(mid, low - 1, -1))
     (right_index, right_sum) = find_max_subarray_from_one_end(array, range(mid + 1, high + 1, 1))
     return left_index, right_index, left_sum + right_sum
 
 
-# see [1] for more details
-def find_maximum_subarray(array, low, high):
+# see [1, Section 4.1] for more details
+def find_max_subarray(array, low, high):
     # base case
     if low == high:
         return low, high, array[low]
 
     # divide and conquer
     mid = (low + high) // 2
-    (left_low, left_high, left_sum) = find_maximum_subarray(array, low, mid)
-    (right_low, right_high, right_sum) = find_maximum_subarray(array, (mid + 1), high)
-    (cross_low, cross_high, cross_sum) = find_maximum_crossing_subarray(array, low, mid, high)
+    (left_low, left_high, left_sum) = find_max_subarray(array, low, mid)
+    (right_low, right_high, right_sum) = find_max_subarray(array, (mid + 1), high)
+    (cross_low, cross_high, cross_sum) = find_max_crossing_subarray(array, low, mid, high)
 
     # combine
     if left_sum >= right_sum and left_sum >= cross_sum:
@@ -41,5 +41,5 @@ def find_maximum_subarray(array, low, high):
         return cross_low, cross_high, cross_sum
 
 
-def solve_for(array):
-    return find_maximum_subarray(array, 0, len(array) - 1)
+def main(array):
+    return find_max_subarray(array, 0, len(array) - 1)
